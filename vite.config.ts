@@ -1,8 +1,8 @@
 import react from '@vitejs/plugin-react'
-import Checker from 'vite-plugin-checker'
 import { resolve } from 'path'
-import { UserConfig } from 'vite'
 import { visualizer } from 'rollup-plugin-visualizer'
+import { UserConfig } from 'vite'
+import Checker from 'vite-plugin-checker'
 
 function pathResolve(dir: string) {
   return resolve(__dirname, '.', dir)
@@ -31,8 +31,7 @@ const config: UserConfig = {
       typescript: true,
       overlay: true,
       eslint: {
-        files: 'src',
-        extensions: ['.ts', '.tsx']
+        lintCommand: 'eslint "./src/**/*.{ts,tsx}"' // for example, lint .ts & .tsx
       }
     })
   ]
