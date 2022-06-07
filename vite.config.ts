@@ -15,13 +15,13 @@ const config: UserConfig = {
     alias: [
       {
         find: /@\//,
-        replacement: pathResolve('src') + '/'
+        replacement: `${pathResolve('src')}/`
       }
     ]
   },
   build: {
     rollupOptions: {
-      plugins: !!shouldAnalyze ? [visualizer({ open: true, filename: './bundle-size/bundle.html' })] : []
+      plugins: shouldAnalyze ? [visualizer({ open: true, filename: './bundle-size/bundle.html' })] : []
     },
     sourcemap: !!shouldAnalyze
   },
@@ -34,8 +34,15 @@ const config: UserConfig = {
         lintCommand: 'eslint "./src/**/*.{ts,tsx}"' // for example, lint .ts & .tsx
       }
     })
-  ]
+  ],
+  define: {
+    global: {}
+  }
 }
+
+/* "define" prevents
+ * Uncaught ReferenceError: global is not defined
+ */
 
 const getConfig = () => config
 

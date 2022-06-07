@@ -1,37 +1,29 @@
-import { FC } from 'react'
-import { Link, Slider, styled } from '@mui/material'
+import { Amplify } from 'aws-amplify'
+import { SnackbarProvider } from 'notistack'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistor, store } from './app/store'
+import currentConfig from './aws/AmplifyConfig'
+import ThemeManager from './components/managers/themeManager/ThemeManager'
+import AppRouter from './routers/AppRouter'
 
-import Header from '@/header'
+Amplify.configure(currentConfig)
 
-const App: FC = () => {
+function App() {
   return (
-    <Root>
-      <Header />
-      <div>
-        <h2>
-          How much do you like{' '}
-          <Link href='https://vitejs.dev/' target='_blank' rel='noopener noreferrer'>
-            Vite?
-          </Link>
-        </h2>
-        <Slider />
-      </div>
-    </Root>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter basename='/react-web-template-cra'>
+          <ThemeManager>
+            <SnackbarProvider>
+              <AppRouter />
+            </SnackbarProvider>
+          </ThemeManager>
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
   )
 }
-
-const Root = styled('div')`
-  padding: 1% 2% 10vh 2%;
-  width: 100%;
-  min-height: 95vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  & a {
-    text-decoration: none;
-    color: ${({ theme: { palette } }) => palette.primary.main};
-  }
-`
 
 export default App
