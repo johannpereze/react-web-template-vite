@@ -1,12 +1,14 @@
-import MailIcon from '@mui/icons-material/Mail'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
+import BadgeIcon from '@mui/icons-material/Badge'
+import LogoutIcon from '@mui/icons-material/Logout'
 import { Box, Divider, List, ListItem, ListItemIcon, ListItemText, SwipeableDrawer } from '@mui/material'
 import { KeyboardEvent, MouseEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { RootState } from '../../app/store'
 import toggleMenuDrawer from '../../helpers/toggleMenuDrawer'
 
 export default function SwipeableTemporaryDrawer() {
+  const { t } = useTranslation()
   const { showDrawer } = useAppSelector((state: RootState) => state.header)
   const dispatch = useAppDispatch()
 
@@ -14,24 +16,33 @@ export default function SwipeableTemporaryDrawer() {
     toggleMenuDrawer({ event, dispatch })
   }
 
+  const drawerItems = [
+    {
+      name: 'user_settings',
+      label: t('general.user_settings'),
+      icon: <BadgeIcon />,
+      onClick: () => {}
+    }
+  ]
+
   const list = () => (
     <Box sx={{ width: 250 }} role='presentation' onClick={toggleDrawer} onKeyDown={toggleDrawer}>
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+        {drawerItems.map(({ name, label, icon, onClick }) => (
+          <ListItem button key={name} onClick={onClick}>
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText primary={label} />
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button>
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText primary={t('login.sign_out')} />
+        </ListItem>
       </List>
     </Box>
   )

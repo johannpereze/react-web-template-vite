@@ -8,7 +8,8 @@ const en = {
       light_mode: 'Light mode',
       login: 'Login',
       save: 'Save',
-      terms_and_conditions: 'Terms and conditions'
+      terms_and_conditions: 'Terms and conditions',
+      user_settings: 'User settings'
     },
     errors: {
       login: {
@@ -36,7 +37,7 @@ const en = {
       an_account_with_the_given_email_already_exists: 'An account with the given email already exists.',
       attempt_limit_exceeded_please_try_after_some_time: 'Attempt limit exceeded, please try after some time.',
       confirm_email: 'Confirm email',
-      confirmation_code: 'Confirmation Code',
+      confirmation_code: 'Confirmation code',
       create_account: 'Create Account',
       create_an_account: 'Create an account.',
       email: 'Email',
@@ -57,7 +58,8 @@ const en = {
       recover_password: 'Recover password',
       repeat_password: 'Repeat password',
       send_code_again: 'Send code again',
-      user_name: 'User Name',
+      sign_out: 'Sign out',
+      user_name: 'User name',
       username: 'Username',
       wait_for_resend: 'Wait for resend:'
     }
