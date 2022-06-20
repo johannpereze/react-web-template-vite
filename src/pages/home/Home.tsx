@@ -1,9 +1,3 @@
-import TodoForm from '../../components/todoForm/TodoForm'
-
 export default function Home() {
-  return (
-    <>
-      <TodoForm />
-    </>
-  )
+  return <h1>Endless possibilities</h1>
 }

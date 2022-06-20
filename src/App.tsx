@@ -14,7 +14,7 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename='/react-web-template-cra'>
+        <BrowserRouter basename='/react-web-template-vite'>
           <ThemeManager>
             <SnackbarProvider>
               <AppRouter />
